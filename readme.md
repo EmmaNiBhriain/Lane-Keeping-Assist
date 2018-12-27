@@ -7,7 +7,7 @@ The feature of an autonomous car that I have chosen to design in this project is
 
 ## Design
 This feature takes data from external sensors such as cameras to analyse the road ahead. This data is combined with data from the cloud which indicates the type of road that the car is on, for example if the car is on a one-way road it does not need to calculate the position of two lanes as there will be no on-coming cars. In the event that the car moves onto a road where there is road markings visible, this system will turn off and another lane keeping assist algorithm can take over.
-<img src= "images/Design-Diagram.JPG"/>
+<img src= "images/Design-Diagram.jpg"/>
 *Figure 1: Design Diagram*
 
 ## Implementation
