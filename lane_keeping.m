@@ -1,8 +1,8 @@
 I  = imread('images/road.jpg'); %read the image to be analysed
 
-I = rgb2gray(I); %convert to greyscale
+Ig = rgb2gray(I); %convert to greyscale
 
-BW = edge(I,'sobel'); %use the sobel edge detection algorithm
+BW = edge(Ig,'sobel'); %use the sobel edge detection algorithm
 imshow(BW) %display the edge detected image
 
 [H,T,R] = hough(BW, 'RhoResolution',0.5,'Theta',-88:88);
@@ -53,8 +53,9 @@ y2 = xy(2,2);
 slope = (y2-y1)/(x2-x1);
 disp("Slope")
 disp(slope)
-xLeft = 1;
-NOTEDYVALUE = slope * (xLeft - x1) + y1; %y=mx+c
+calculatedx1 = (0-y1)/slope + x1;
+disp('CALCULATED X')
+disp(calculatedx1)
 %plot([xLeft, xRight], [yLeft, yRight], 'LineWidth',2,'Color','green');
 
 xy = [lines(2).point1; lines(2).point2];
@@ -67,12 +68,12 @@ y2 = xy(2,2);
 slope = (y2-y1)/(x2-x1);
 disp("Slope")
 disp(slope)
-calculatedx = (NOTEDYVALUE-y1)/slope;
+calculatedx = (0-y1)/slope + x1;
 disp('CALCULATED X')
 disp(calculatedx)
 
-NewPoint1X = (1+calculatedx)/2;
-NewPoint1 = [NewPoint1X, NOTEDYVALUE];
+NewPoint1X = (calculatedx1+calculatedx)/2;
+NewPoint1 = [NewPoint1X, 0];
 
 
 %--------------------------------------------------------------------------
@@ -106,7 +107,7 @@ y2 = xy(2,2);
 slope = (y2-y1)/(x2-x1);
 disp("Slope")
 disp(slope)
-newcalculatedx = (NOTEDYVALUE2-y1)/slope;
+newcalculatedx = (NOTEDYVALUE2-y1)/slope + x1;
 disp('CALCULATED X')
 disp(newcalculatedx)
 
