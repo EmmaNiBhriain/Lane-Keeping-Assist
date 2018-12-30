@@ -14,6 +14,121 @@ figure, imshow(I), hold on
 [rows, columns]=size(Ic);
 max_len = 0;
 for k = 1:length(lines)
-   xy = [lines(k).point1; lines(k).point2];   
-   plot(xy(:,1),xy(:,2),'LineWidth',2,'Color','green');
+   xy = [lines(k).point1; lines(k).point2];
+   disp(xy)
+   % Get the equation of the line
+   x1 = xy(1,1);
+   y1 = xy(1,2);
+   x2 = xy(2,1);
+   y2 = xy(2,2);
+   slope = (y2-y1)/(x2-x1);
+   disp("Slope")
+   disp(slope)
+   xLeft = 2;
+   yLeft = slope * (xLeft - x1) + y1; %y=mx+c
+   disp('OOOOO')
+   disp(yLeft)
+   xRight = columns;
+   yRight = slope * (xRight - x1) + y1;
+   plot([xLeft, xRight], [yLeft, yRight], 'LineWidth',2,'Color','green');
 end
+
+
+
+
+%--------------------------------------------------------------------------
+%            New Point 1
+%--------------------------------------------------------------------------
+% Find the y value of line 1 when x=1 (ans = -123)
+% Find the x value of line 2 when y = -123
+% Find the x value halfway between these points to calculate a point on the
+% line that separates the two lines
+xy = [lines(1).point1; lines(1).point2];
+disp(xy)
+   % Get the equation of the line
+x1 = xy(1,1);
+y1 = xy(1,2);
+x2 = xy(2,1);
+y2 = xy(2,2);
+slope = (y2-y1)/(x2-x1);
+disp("Slope")
+disp(slope)
+xLeft = 1;
+NOTEDYVALUE = slope * (xLeft - x1) + y1; %y=mx+c
+%plot([xLeft, xRight], [yLeft, yRight], 'LineWidth',2,'Color','green');
+
+xy = [lines(2).point1; lines(2).point2];
+disp(xy)
+   % Get the equation of the line
+x1 = xy(1,1);
+y1 = xy(1,2);
+x2 = xy(2,1);
+y2 = xy(2,2);
+slope = (y2-y1)/(x2-x1);
+disp("Slope")
+disp(slope)
+calculatedx = (NOTEDYVALUE-y1)/slope;
+disp('CALCULATED X')
+disp(calculatedx)
+
+NewPoint1X = (1+calculatedx)/2;
+NewPoint1 = [NewPoint1X, NOTEDYVALUE];
+
+
+%--------------------------------------------------------------------------
+%            New Point 2 
+%--------------------------------------------------------------------------
+xy = [lines(2).point1; lines(2).point2];
+disp(xy)
+   % Get the equation of the line
+x1 = xy(1,1);
+y1 = xy(1,2);
+x2 = xy(2,1);
+y2 = xy(2,2);
+slope = (y2-y1)/(x2-x1);
+disp("Slope")
+disp(slope)
+xLeft = 1;
+NOTEDYVALUE2 = slope * (xLeft - x1) + y1; %y=mx+c
+disp("New noted value")
+disp(NOTEDYVALUE2)
+xRight = columns;
+yRight1 = slope * (xRight - x1) + y1;
+
+
+xy = [lines(1).point1; lines(1).point2];
+disp(xy)
+   % Get the equation of the line
+x1 = xy(1,1);
+y1 = xy(1,2);
+x2 = xy(2,1);
+y2 = xy(2,2);
+slope = (y2-y1)/(x2-x1);
+disp("Slope")
+disp(slope)
+newcalculatedx = (NOTEDYVALUE2-y1)/slope;
+disp('CALCULATED X')
+disp(newcalculatedx)
+
+
+NewPoint2X = (1+newcalculatedx)/2;
+NewPoint2 = [NewPoint2X, NOTEDYVALUE2];
+
+
+%Create new line using calculated points and plot on image
+
+xy = [NewPoint1; NewPoint2];
+disp(xy)
+   % Get the equation of the line
+x1 = xy(1,1);
+y1 = xy(1,2);
+x2 = xy(2,1);
+y2 = xy(2,2);
+slope = (y2-y1)/(x2-x1);
+disp("Slope")
+disp(slope)
+xLeft = 1;
+yLeft = slope * (xLeft - x1) + y1; %y=mx+c
+xRight = columns;
+yRight = slope * (xRight - x1) + y1;
+plot([xLeft, xRight], [yLeft, yRight], 'LineWidth',2,'Color','green');
