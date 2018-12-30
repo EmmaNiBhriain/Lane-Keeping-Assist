@@ -1,3 +1,4 @@
+location = 1; % 1 = Germany
 I  = imread('images/road.jpg'); %read the image to be analysed
 
 Ig = rgb2gray(I); %convert to greyscale
@@ -53,6 +54,13 @@ y2 = xy(2,2);
 slope = (y2-y1)/(x2-x1);
 disp("Slope")
 disp(slope)
+disp(slope)
+xLeft = 1;
+yLeft = slope * (xLeft - x1) + y1; %y=mx+c
+xRight = columns;
+yRight = slope * (xRight - x1) + y1;
+existingLine = line([xLeft, xRight], [yLeft, yRight]);
+set(existingLine, 'LineWidth',2,'Color','green')
 calculatedx1 = (0-y1)/slope + x1;
 disp('CALCULATED X')
 disp(calculatedx1)
@@ -132,4 +140,19 @@ xLeft = 1;
 yLeft = slope * (xLeft - x1) + y1; %y=mx+c
 xRight = columns;
 yRight = slope * (xRight - x1) + y1;
-plot([xLeft, xRight], [yLeft, yRight], 'LineWidth',2,'Color','green');
+calculatedLine = line([xLeft, xRight], [yLeft, yRight]);
+set(calculatedLine, 'LineWidth',2,'Color','green')
+%plot([xLeft, xRight], [yLeft, yRight], 'LineWidth',2,'Color','green');
+
+
+%disp(existingLine)
+%1 3537]
+%[-123.8991 888.2404]
+%disp(calculatedLine)
+
+%[1 3537]
+%YData: [-780.3535 4.1086e+03]
+
+if(location == 1)
+    patch([1 1 3537 3537], [-123.8991 -780.3535 4.1086e+03 888.2404],'r')
+end
