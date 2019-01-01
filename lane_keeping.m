@@ -23,12 +23,10 @@ for k = 1:length(lines)
    x2 = xy(2,1);
    y2 = xy(2,2);
    slope = (y2-y1)/(x2-x1);
-   disp("Slope")
-   disp(slope)
+   %disp("Slope")
+   %disp(slope)
    xLeft = 2;
    yLeft = slope * (xLeft - x1) + y1; %y=mx+c
-   disp('OOOOO')
-   disp(yLeft)
    xRight = columns;
    yRight = slope * (xRight - x1) + y1;
    plot([xLeft, xRight], [yLeft, yRight], 'LineWidth',2,'Color','green');
@@ -45,16 +43,14 @@ end
 % Find the x value halfway between these points to calculate a point on the
 % line that separates the two lines
 xy = [lines(1).point1; lines(1).point2];
-disp(xy)
    % Get the equation of the line
 x1 = xy(1,1);
 y1 = xy(1,2);
 x2 = xy(2,1);
 y2 = xy(2,2);
 slope = (y2-y1)/(x2-x1);
-disp("Slope")
-disp(slope)
-disp(slope)
+%disp("Slope")
+%disp(slope)
 xLeft = 1;
 yLeft = slope * (xLeft - x1) + y1; %y=mx+c
 xRight = columns;
@@ -62,23 +58,21 @@ yRight = slope * (xRight - x1) + y1;
 existingLine = line([xLeft, xRight], [yLeft, yRight]);
 set(existingLine, 'LineWidth',2,'Color','green')
 calculatedx1 = (0-y1)/slope + x1;
-disp('CALCULATED X')
-disp(calculatedx1)
-%plot([xLeft, xRight], [yLeft, yRight], 'LineWidth',2,'Color','green');
+%disp('CALCULATED X')
+%disp(calculatedx1)
 
 xy = [lines(2).point1; lines(2).point2];
-disp(xy)
    % Get the equation of the line
 x1 = xy(1,1);
 y1 = xy(1,2);
 x2 = xy(2,1);
 y2 = xy(2,2);
 slope = (y2-y1)/(x2-x1);
-disp("Slope")
-disp(slope)
+%disp("Slope")
+%disp(slope)
 calculatedx = (0-y1)/slope + x1;
-disp('CALCULATED X')
-disp(calculatedx)
+%disp('CALCULATED X')
+%disp(calculatedx)
 
 NewPoint1X = (calculatedx1+calculatedx)/2;
 NewPoint1 = [NewPoint1X, 0];
@@ -135,7 +129,9 @@ NewPoint2 = [NewPoint2X, NOTEDYVALUE2];
 disp('NewPoint2:');
 disp(NewPoint2X)
 
-%Create new line using calculated points and plot on image
+%--------------------------------------------------------------------------
+%       Create new line using calculated points and plot on image
+%--------------------------------------------------------------------------
 
 xy = [NewPoint1; NewPoint2];
 disp(xy)
@@ -153,14 +149,14 @@ xRight = columns;
 yRight = slope * (xRight - x1) + y1;
 calculatedLine = line([xLeft, xRight], [yLeft, yRight]);
 set(calculatedLine, 'LineWidth',2,'Color','green')
-%plot([xLeft, xRight], [yLeft, yRight], 'LineWidth',2,'Color','green');
 
-
-%disp(existingLine) [x1,x2][y1,y2]: [1 3537] [-123.8991 888.2404]
 disp(calculatedLine) %[x1,x2][y1,y2]: [1 3537] [-780.3535 4.1086e+03]
 disp(line2) %[x1,x2][y1,y2]: [1 3537] [339.9770 -1.3874e+03]
 
 
+%--------------------------------------------------------------------------
+%       Highlight lane in to drive in
+%--------------------------------------------------------------------------
 
 if(location == 1)
     patch([1 1 3537 3537], [-123.8991 -780.3535 4.1086e+03 888.2404],'r')
@@ -168,7 +164,13 @@ elseif(location == 2)
     fill([1 1 3537 3537], [-780.3535 339.9770 -1.3874e+03 4.1086e+03],'r')
 end
 
+%--------------------------------------------------------------------------
+%           Set steering angle in simulink
+%           
+%           In future iterations, calculations should be performed to alter
+%           the steering angle based on position of the vehicle in relation
+%           to the calculated lane
+%--------------------------------------------------------------------------
 
-set_steering_angle = 30;
 open_system('simple_steering')
 set_param('simple_steering/Set_steering_angle','Value','25')

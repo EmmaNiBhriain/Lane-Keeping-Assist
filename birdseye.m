@@ -46,7 +46,7 @@ figure, imshow(BEV), hold on
 max_len = 0;
 for k = 1:length(lines)
    xy = [lines(k).point1; lines(k).point2];
-   plot(xy(:,1),xy(:,2),'LineWidth',2,'Color','green');
+   %plot(xy(:,1),xy(:,2),'LineWidth',2,'Color','green');
 end
 title('Birdseye View');
 
