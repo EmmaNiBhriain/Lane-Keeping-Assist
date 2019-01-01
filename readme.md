@@ -1,4 +1,5 @@
 # Advanced Lane Keeping Assist
+Github repository available at: https://github.com/EmmaNiBhriain/Lane-Keeping-Assist
 
 ## Description
 This project is for my Advanced Driver Assistance Systems assignment. The requirements of this assignment are to design, implement and simulate an ADAS solution using Matlab and Simulink.
