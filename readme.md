@@ -11,6 +11,9 @@ The feature of an autonomous car that I have chosen to design in this project is
 2. Open the lane_keeping.m file
 3. Run the lane_keeping.m file in Matlab
 
+## Documentation
+This project is accompanied by an IEEE format report in both .doc and .pdf format. Open the files Advanced_Lane_Keeping.doc or Advanced_Lane_Keeping.pdf to read the report.
+
 ## Design
 This feature takes data from external sensors such as cameras to analyse the road ahead. This data is combined with data from the cloud which indicates the type of road that the car is on, for example if the car is on a one-way road it does not need to calculate the position of two lanes as there will be no on-coming cars. In the event that the car moves onto a road where there is road markings visible, this system will turn off and another lane keeping assist algorithm can take over.
 <img src= "images/Design-Diagram.jpg"/>
