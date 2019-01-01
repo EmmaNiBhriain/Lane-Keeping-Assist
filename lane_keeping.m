@@ -1,4 +1,4 @@
-location = 1; % 1 = Germany
+location = 1; % 1 = Germany, 2 = Ireland
 I  = imread('images/road.jpg'); %read the image to be analysed
 
 Ig = rgb2gray(I); %convert to greyscale
@@ -12,7 +12,7 @@ P  = houghpeaks(H,2,'threshold',ceil(0.3*max(H(:))),'NHoodSize',[95 95]);
 
 lines = houghlines(BW,T,R,P,'FillGap',40,'MinLength',40);
 figure, imshow(I), hold on
-[rows, columns]=size(Ic);
+[rows, columns]=size(I);
 max_len = 0;
 for k = 1:length(lines)
    xy = [lines(k).point1; lines(k).point2];
@@ -82,6 +82,16 @@ disp(calculatedx)
 
 NewPoint1X = (calculatedx1+calculatedx)/2;
 NewPoint1 = [NewPoint1X, 0];
+disp('NewPoint1:');
+disp(NewPoint1X)
+
+%Get an equation for line 2, used to calculate area to be shaded
+xLeft = 1;
+yLeft = slope * (xLeft - x1) + y1; %y=mx+c
+xRight = columns;
+yRight = slope * (xRight - x1) + y1;
+line2 = line([xLeft, xRight], [yLeft, yRight]);
+%set(line2, 'LineWidth',2,'Color','green')
 
 
 %--------------------------------------------------------------------------
@@ -122,7 +132,8 @@ disp(newcalculatedx)
 
 NewPoint2X = (1+newcalculatedx)/2;
 NewPoint2 = [NewPoint2X, NOTEDYVALUE2];
-
+disp('NewPoint2:');
+disp(NewPoint2X)
 
 %Create new line using calculated points and plot on image
 
@@ -145,14 +156,19 @@ set(calculatedLine, 'LineWidth',2,'Color','green')
 %plot([xLeft, xRight], [yLeft, yRight], 'LineWidth',2,'Color','green');
 
 
-%disp(existingLine)
-%1 3537]
-%[-123.8991 888.2404]
-%disp(calculatedLine)
+%disp(existingLine) [x1,x2][y1,y2]: [1 3537] [-123.8991 888.2404]
+disp(calculatedLine) %[x1,x2][y1,y2]: [1 3537] [-780.3535 4.1086e+03]
+disp(line2) %[x1,x2][y1,y2]: [1 3537] [339.9770 -1.3874e+03]
 
-%[1 3537]
-%YData: [-780.3535 4.1086e+03]
+
 
 if(location == 1)
     patch([1 1 3537 3537], [-123.8991 -780.3535 4.1086e+03 888.2404],'r')
+elseif(location == 2)
+    fill([1 1 3537 3537], [-780.3535 339.9770 -1.3874e+03 4.1086e+03],'r')
 end
+
+
+set_steering_angle = 30;
+open_system('simple_steering')
+set_param('simple_steering/Set_steering_angle','Value','25')
