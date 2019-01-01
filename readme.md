@@ -5,6 +5,11 @@ This project is for my Advanced Driver Assistance Systems assignment. The requir
 
 The feature of an autonomous car that I have chosen to design in this project is Advanced Lane Keeping Assist. This feature will be used on roads without road markings to help with positioning of the vehicle on the road by calculating where the road markings should be, thereby creating a lane in which the car should remain.
 
+## Instructions for use
+1. Download the repository, including the images folder.
+2. Open the lane_keeping.m file
+3. Run the lane_keeping.m file in Matlab
+
 ## Design
 This feature takes data from external sensors such as cameras to analyse the road ahead. This data is combined with data from the cloud which indicates the type of road that the car is on, for example if the car is on a one-way road it does not need to calculate the position of two lanes as there will be no on-coming cars. In the event that the car moves onto a road where there is road markings visible, this system will turn off and another lane keeping assist algorithm can take over.
 <img src= "images/Design-Diagram.jpg"/>
